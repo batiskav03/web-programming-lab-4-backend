@@ -1,12 +1,14 @@
 package web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.annotation.RequestScope;
-import org.springframework.web.context.annotation.SessionScope;
-import web.Dot;
+import web.model.Dot;
 import web.service.DotsService;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -19,22 +21,26 @@ public class DotsController {
         this.service = service;
     }
 
-    @PostMapping("/getDots")
+    //todo: удалить бред с count
+    @GetMapping("/getDots")
+    @CrossOrigin(origins = { "http://localhost:3000" }, allowedHeaders = "*", allowCredentials = "true")
     public List<Dot> getDots(
-            @RequestBody int leftLimit,
-            @RequestBody int rightLimit
+            @RequestParam("leftLimit") int leftLimit,
+            @RequestParam("rightLimit") int rightLimit,
+            @RequestParam("count") int count
     ){
-        return service.getDots(leftLimit, rightLimit);
+        List<Dot> result = service.getDots(leftLimit, rightLimit, count);
+        return result;
+
     }
 
     @PostMapping("/saveDot")
-    public void saveDot(@RequestBody Dot dot) {
-        service.saveDot(dot);
+    @ResponseBody
+    @CrossOrigin(origins = { "http://localhost:3000" }, allowedHeaders = "*", allowCredentials = "true")
+    public Dot saveDot(@RequestBody Dot dot) {
+        return service.saveDot(dot);
     }
 
 
-    public boolean validateDot() {
-        return true;
-    }
 
 }

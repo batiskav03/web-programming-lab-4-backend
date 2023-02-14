@@ -1,10 +1,13 @@
-package web;
+package web.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
 @Data
+
 public class Dot {
+
+
 
     @Id
     private long id;
