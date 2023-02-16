@@ -6,6 +6,7 @@ import org.springframework.data.repository.ListPagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import web.model.Dot;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -19,6 +20,6 @@ public interface DotsRepository extends ListPagingAndSortingRepository<Dot, Long
 
     @Query("INSERT INTO dots VALUES (default ,:x, :y, :user, :result, COALESCE(:data, now()))")
     @Modifying
-    void saveDot(long x, long y, String user, boolean result, String data);
+    void saveDot(long x, long y, String user, boolean result, Date data);
 
 }

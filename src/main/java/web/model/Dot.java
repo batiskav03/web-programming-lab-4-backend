@@ -3,8 +3,9 @@ package web.model;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
-@Data
+import java.util.Date;
 
+@Data
 public class Dot {
 
 
@@ -15,6 +16,6 @@ public class Dot {
     private long y;
     private String user;
     private boolean result;
-    private String date;
+    private Date date;
 
 }

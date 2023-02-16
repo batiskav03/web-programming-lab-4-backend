@@ -32,7 +32,7 @@ public class DotsService {
 
     public Dot saveDot(Dot dot) {
         if (dot.getDate() == null){
-            dot.setDate(new Date().toString());
+            dot.setDate(new Date());
         }
         if (!dot.isResult()) {
             dot.setResult(checkAccuracy(dot));
