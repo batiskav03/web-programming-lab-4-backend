@@ -32,7 +32,8 @@ public class SecurityConfig  {
                 .authorizeHttpRequests((authorize) -> authorize
                                 .requestMatchers("/graph").authenticated()
                                 .requestMatchers("/api/**").authenticated()
-                                .requestMatchers("/**").permitAll()
+                                .requestMatchers("/static/**").permitAll()
+                                .anyRequest().authenticated()
 //                        .requestMatchers("/react/**").permitAll()
 //                        .requestMatchers("/signup/**").permitAll()
 //
@@ -40,7 +41,6 @@ public class SecurityConfig  {
 //                                .requestMatchers("/**").permitAll()
 //                        .requestMatchers("/api/**").authenticated()
                         )
-
                 .formLogin((form) -> form
                         .loginPage("/login").permitAll()
                         .defaultSuccessUrl("/graph",true));
