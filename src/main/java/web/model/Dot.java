@@ -15,7 +15,7 @@ public class Dot {
     private long x;
     private long y;
     private String user;
-    private boolean result;
+    private boolean accuracy;
     private Date date;
 
 }

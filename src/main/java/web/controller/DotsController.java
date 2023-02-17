@@ -17,6 +17,8 @@ import java.util.List;
 @RequestMapping("/api")
 public class DotsController {
 
+
+
     private DotsService service;
 
     @Autowired
@@ -28,10 +30,10 @@ public class DotsController {
     @GetMapping("/getDots")
     public List<Dot> getDots(
             @RequestParam("leftLimit") int leftLimit,
-            @RequestParam("rightLimit") int rightLimit,
-            @RequestParam("count") int count
+            @RequestParam("rightLimit") int rightLimit
+
     ){
-        List<Dot> result = service.getDots(leftLimit, rightLimit, count);
+        List<Dot> result = service.getDots(leftLimit, rightLimit);
         return result;
 
     }
@@ -43,7 +45,10 @@ public class DotsController {
         return service.saveDot(dot);
     }
 
-
+    @PostMapping("/getOwnDots")
+    public List<Dot> getOwnDots() {
+        return service.getOwnDots();
+    }
 
 
 }

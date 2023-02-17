@@ -26,7 +26,6 @@ public class UserService {
                 .roles("USER")
                 .build();
         users.createUser(userDetails);
-
         request.login(user.getLogin(), result);
     }
 }

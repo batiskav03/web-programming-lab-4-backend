@@ -6,6 +6,7 @@ import web.model.Dot;
 import web.repository.DotsRepository;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,18 +16,27 @@ public class DotsService {
 
     private int countTake;
     private DotsRepository repository;
+    private List<Dot> dotslist;
 
 
     public DotsService(DotsRepository repository) {
         this.countTake = -1;
         this.repository = repository;
+        this.dotslist = new ArrayList<>();
     }
 
-    //todo: заменить костыль count на countTake
-    public List<Dot> getDots(int leftLimit, int rightLimit, int count) {
+    public List<Dot> getDots(int leftLimit, int rightLimit) {
+        if (countTake > 700) {
+            countTake = 0;
+        }
         countTake++;
-        List<Dot> result = repository.getDots(leftLimit, rightLimit, count);
+        List<Dot> result = repository.getDots(leftLimit, rightLimit, countTake);
+
         return result;
+    }
+
+    public List<Dot> getOwnDots() {
+        return dotslist;
     }
 
 
@@ -34,11 +44,12 @@ public class DotsService {
         if (dot.getDate() == null){
             dot.setDate(new Date());
         }
-        if (!dot.isResult()) {
-            dot.setResult(checkAccuracy(dot));
+        if (!dot.isAccuracy()) {
+            dot.setAccuracy(checkAccuracy(dot));
         }
+        dotslist.add(dot);
         repository.saveDot(dot.getX(), dot.getY(),
-                dot.getUser(), dot.isResult(),
+                dot.getUser(), dot.isAccuracy(),
                 dot.getDate());
 
         return dot;

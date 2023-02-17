@@ -33,14 +33,8 @@ public class SecurityConfig  {
                                 .requestMatchers("/graph").authenticated()
                                 .requestMatchers("/api/**").authenticated()
                                 .requestMatchers("/static/**").permitAll()
-                                .anyRequest().authenticated()
-//                        .requestMatchers("/react/**").permitAll()
-//                        .requestMatchers("/signup/**").permitAll()
-//
-//                        .requestMatchers("/graph").authenticated()
-//                                .requestMatchers("/**").permitAll()
-//                        .requestMatchers("/api/**").authenticated()
-                        )
+                                .requestMatchers("/register").permitAll()
+                                .anyRequest().authenticated())
                 .formLogin((form) -> form
                         .loginPage("/login").permitAll()
                         .defaultSuccessUrl("/graph",true));
